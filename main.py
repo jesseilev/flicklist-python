@@ -74,6 +74,7 @@ class Handler(webapp2.RequestHandler):
         if user_id:
             self.user = User.get_by_id(int(user_id))
         elif self.request.path not in allowed_routes:
+            self.user = None
             self.redirect('/login')
 
 
