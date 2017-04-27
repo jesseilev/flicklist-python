@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ message if message else "" }}</h1>
+{% if message %}
+<div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{ message }}</div>
+{% endif %}
 
 <h2>Movies I Want to Watch:</h2>
 
-<ul>
+<ul class="list-group">
 {% for movie in movies %}
-    <li>
+    <li class="list-group-item">
         <form action="/watched-it" method="post">
-            {{ movie.title }}
+        {{ movie.title }}
             <input type="hidden" name="watched-movie" value="{{ movie.key().id() }}"/>
-            <input type="submit" value="I Watched It!"/>
+            <input class="btn btn-default" type="submit" value="I Watched It!"/>
         </form>
     </li>
 {% endfor %}
@@ -22,7 +26,7 @@
         I also want to watch
         <input type="text" name="new-movie"/>
     </label>
-    <input type="submit" value="Add it to My List"/>
+    <input class="btn btn-default" type="submit" value="Add it to My List"/>
 </form>
 
 <p class="error">{{ error if error else "" }}</p>

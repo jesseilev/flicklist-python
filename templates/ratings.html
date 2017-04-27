@@ -3,14 +3,14 @@
 {% block content %}
 <h2>Movies I Have Watched:</h2>
 
-<ul>
+<ul class="list-group">
 {% for movie in movies %}
-    <li>
+    <li class="list-group-item">
         <h3>{{ movie.title }}</h3>
         <form action="/ratings" method="post">
             <label>
                 My Rating:
-                <select name="rating">
+                <select name="rating" class="form-control">
                 {% for rating in ["How was it?", "*", "**", "***", "****", "*****"] %}
                     <option {{ "selected" if rating == movie.rating else "" }}>
                         {{ rating }}
@@ -19,7 +19,7 @@
                 </select>
             </label>
             <input type="hidden" name="movie" value="{{ movie.key().id() }}"/>
-            <input type="submit" value="Rate it!"/>
+            <input type="submit" class="btn btn-default" value="Rate it!"/>
         </form>
     </li>
 {% endfor %}
